@@ -1,15 +1,10 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import {
-  FLOW_NAME,
-  SCHEMA_PROMPT,
-  SCHEMA_RESULT,
-} from "./../constants";
+import { FLOW_NAME } from "./../constants";
+import { FlowOptionsSchema } from "./../interfaces";
 
 export const flowConfig = {
   name: FLOW_NAME,
-  inputSchema: z.object({
-    prompt: z.string().describe(SCHEMA_PROMPT),
-  }),
-  outputSchema: z.string().describe(SCHEMA_RESULT),
+  inputSchema: FlowOptionsSchema,
+  outputSchema: z.any(),
 };

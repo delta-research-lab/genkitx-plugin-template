@@ -8,53 +8,77 @@ Before using this plugin, you need to have a PostgreSQL database running and hav
 
 ## Installation
 
-To install this plugin, you need to have Node.js and npm installed. Then, run the following command to install the plugin and its dependencies:
+1.  **Initialize Genkit**
 
-```bash
-npm install genkitx-plugin-postgres
-```
+    If you don't have a Genkit project yet, you can create one by running the following command:
+
+    ```bash
+    npm create genkit@latest
+    ```
+
+    This will create a new directory with a sample Genkit project.
+
+2.  **Install the plugin**
+
+    To install this plugin, you can install it from npm:
+
+    ```bash
+    npm install genkitx-plugin-postgres
+    ```
+
+    Or, if you are developing the plugin locally, you can install it from the local directory:
+
+    ```bash
+    npm install /path/to/genkitx-plugin-postgres
+    ```
 
 ## Usage
 
 To use this plugin, you need to import it and configure it with your PostgreSQL connection details.
 
-```typescript
-import { configure } from "@genkit-ai/core";
-import { postgresPlugin } from "genkitx-plugin-postgres";
+1.  **Import and configure the plugin**
 
-configure({
-  plugins: [
-    postgresPlugin({
-      connection: {
-        host: "localhost",
-        port: 5432,
-        user: "user",
-        password: "password",
-        database: "database",
-      },
-    }),
-  ],
-});
-```
+    In your Genkit flow file (e.g., `index.ts`), import the plugin and configure it with your PostgreSQL connection details.
 
-You can also configure the connection details using the `POSTGRES_CONNECTION_STRING` environment variable.
+    ```typescript
+    import { configure } from "@genkit-ai/core";
+    import { postgresPlugin } from "genkitx-plugin-postgres";
 
-```
-export POSTGRES_CONNECTION_STRING="postgresql://user:password@localhost:5432/database"
-```
+    configure({
+      plugins: [
+        postgresPlugin({
+          connection: {
+            host: "localhost",
+            port: 5432,
+            user: "user",
+            password: "password",
+            database: "database",
+          },
+        }),
+      ],
+    });
+    ```
 
-Then, you can use the `getPostgresData` flow to execute a query.
+    You can also configure the connection details using the `POSTGRES_CONNECTION_STRING` environment variable.
 
-```typescript
-import { run } from "@genkit-ai/flow";
-import { getPostgresData } from "genkitx-plugin-postgres";
+    ```
+    export POSTGRES_CONNECTION_STRING="postgresql://user:password@localhost:5432/database"
+    ```
 
-const response = await run(getPostgresData, {
-  query: "SELECT * FROM my_table",
-});
+2.  **Use the `getPostgresData` flow**
 
-console.log(response);
-```
+    Now, you can use the `getPostgresData` flow to execute a query.
+
+    ```typescript
+    import { run } from "@genkit-ai/flow";
+    import { getPostgresData } from "genkitx-plugin-postgres";
+
+    const response = await run(getPostgresData, {
+      query: "SELECT * FROM my_table",
+    });
+
+    console.log(response);
+    ```
 
 ### Trying out the plugin
 

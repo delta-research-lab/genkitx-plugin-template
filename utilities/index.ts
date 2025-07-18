@@ -1,9 +1,10 @@
 import { GenkitError } from "@genkit-ai/core";
 import { StatusName } from "@genkit-ai/core/lib/statusTypes";
-
 import { PluginOptions } from "./../interfaces";
-
-import { ERROR_INVALID_ARGUMENT, ERROR_NO_API_KEY } from "./../constants";
+import {
+  ERROR_INVALID_ARGUMENT,
+  ERROR_NO_CONNECTION_CONFIG,
+} from "./../constants";
 
 export const throwError = (status: StatusName, message: string) => {
   throw new GenkitError({
@@ -12,7 +13,8 @@ export const throwError = (status: StatusName, message: string) => {
   });
 };
 
-export const isApiKeyExist = (pluginOptions: PluginOptions) => {
-  const { apiKey } = pluginOptions;
-  if (!apiKey) return throwError(ERROR_INVALID_ARGUMENT, ERROR_NO_API_KEY);
+export const isConnectionConfigExist = (pluginOptions: PluginOptions) => {
+  const { connection } = pluginOptions;
+  if (!connection)
+    return throwError(ERROR_INVALID_ARGUMENT, ERROR_NO_CONNECTION_CONFIG);
 };

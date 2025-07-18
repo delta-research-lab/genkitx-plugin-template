@@ -4,13 +4,13 @@ import { defineFlow } from "@genkit-ai/flow";
 import { PluginOptions } from "./interfaces";
 import { pluginAction } from "./actions";
 import { flowConfig } from "./config";
-import { isApiKeyExist } from "./utilities";
+import { isConnectionConfigExist } from "./utilities";
 import { PLUGIN_NAME } from "./constants";
 
-export const myCustomPlugin = genkitPlugin(
+export const getPostgresData = genkitPlugin(
   PLUGIN_NAME,
   async (pluginOptions: PluginOptions) => {
-    isApiKeyExist(pluginOptions);
+    isConnectionConfigExist(pluginOptions);
     defineFlow(flowConfig, (flowOptions) =>
       pluginAction(flowOptions, pluginOptions)
     );

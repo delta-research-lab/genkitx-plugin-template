@@ -1,28 +1,11 @@
-interface HistoryContent {
-  text: string;
-}
+import { z } from "zod";
 
-export interface History {
-  role: 'user' | 'model';
-  content: HistoryContent[];
-}
+export const FlowOptionsSchema = z.object({
+  query: z.string().min(1).describe("The SQL query to execute."),
+});
+export type FlowOptions = z.infer<typeof FlowOptionsSchema>;
 
-export interface FlowOptions {
-  prompt: string;
-  temperature?: number;
-  maxOutputTokens?: number;
-  topK?: number;
-  topP?: number;
-  stopSequences?: string[];
-}
-
-export interface IndexerFlowOptions {
-  dataPath: string;
-  indexOutputPath: string;
-  chunkSize?: number;
-  separator?: string;
-}
-
-export interface PluginOptions {
-  apiKey?: string;
-}
+export const PluginOptionsSchema = z.object({
+  connection: z.any().optional(),
+});
+export type PluginOptions = z.infer<typeof PluginOptionsSchema>;
